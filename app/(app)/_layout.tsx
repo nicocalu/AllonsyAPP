@@ -32,6 +32,7 @@ export default function AppLayout() {
     >
       <Stack.Screen name="(sender)/index" options={{ title: 'Sender Dashboard' }} />
       <Stack.Screen name="(driver)/index" options={{ title: 'Driver Dashboard' }} />
+      <Stack.Screen name="(driver)/delivery-details" options={{ title: 'Delivery Details' }} />
     </Stack>
   );
 }
