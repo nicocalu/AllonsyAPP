@@ -1,13 +1,38 @@
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { useStore, Delivery } from '../../../src/store/useStore';
 
 export default function DriverHome() {
+  const router = useRouter();
+  const setLastDelivery = useStore((state) => state.setLastDelivery);
+
+  // Sample delivery for demonstration
+  const sampleDelivery: Delivery = {
+    id: '1',
+    from: 'Paris, 75001',
+    to: 'Boulogne-Billancourt, 92100',
+    distance: 5.2,
+    estimatedPrice: 25.00,
+    driverEarnings: 18.75,
+    pointsReward: 50,
+    estimatedTime: 25,
+    description: 'Colis fragile - Contient des verres. À livrer avant 17h.',
+    status: 'pending',
+    createdAt: new Date().toISOString(),
+  };
+
+  const handleViewDelivery = () => {
+    setLastDelivery(sampleDelivery);
+    router.push('/(app)/(driver)/delivery-details');
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🚗 Driver Mode</Text>
       <Text style={styles.description}>Find deliveries and manage your accepted jobs.</Text>
       
       <View style={styles.actions}>
-        <Button title="Find Open Deliveries" onPress={() => {}} />
+        <Button title="Find Open Deliveries" onPress={handleViewDelivery} />
         <View style={{ height: 10 }} />
         <Button title="My Active Jobs" onPress={() => {}} />
       </View>
