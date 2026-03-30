@@ -9,9 +9,18 @@ export default function AppLayout() {
   return (
     <Stack
       screenOptions={{
+        headerStyle: {
+          backgroundColor: '#ffffff',
+        },
+        headerTitleStyle: {
+          color: '#082a56',
+          fontWeight: '700',
+        },
+        headerTintColor: '#ed176e',
         headerRight: () => (
           <Button 
             title={`Switch to ${mode === 'sender' ? 'Driver' : 'Sender'}`} 
+            color="#ed176e"
             onPress={() => {
               toggleMode();
               router.replace(mode === 'sender' ? '/(app)/(driver)' : '/(app)/(sender)');
@@ -21,7 +30,7 @@ export default function AppLayout() {
         headerLeft: () => (
           <Button 
             title="Logout" 
-            color="red"
+            color="#ed176e"
             onPress={() => {
               logout();
               router.replace('/(auth)/login');
@@ -32,6 +41,7 @@ export default function AppLayout() {
     >
       <Stack.Screen name="(sender)/index" options={{ title: 'Sender Dashboard' }} />
       <Stack.Screen name="(driver)/index" options={{ title: 'Driver Dashboard' }} />
+      <Stack.Screen name="(driver)/delivery-details" options={{ title: 'Delivery Details' }} />
     </Stack>
   );
 }

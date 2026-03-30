@@ -1,9 +1,11 @@
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useStore } from '@/src/store/useStore';
 
 export default function CreateDelivery() {
   const router = useRouter();
+  const addMission = useStore((state) => state.addMission);
 
   // 1. États pour la création de la livraison
   const [pickupAddress, setPickupAddress] = useState('');
@@ -37,12 +39,13 @@ export default function CreateDelivery() {
   const handlePublish = () => {
     if (!estimation) return;
 
-    // Ici, tu connecteras plus tard à ton Zustand store ou ton API
-    console.log("Nouvelle mission générée :", {
+    addMission({
       pickupAddress,
       dropoffAddress,
       itemDescription,
-      financials: estimation
+      price: estimation.price,
+      driverEarnings: estimation.driverEarnings,
+      points: estimation.points,
     });
     
     Alert.alert("Succès", "Votre demande a été publiée !");
@@ -83,7 +86,7 @@ export default function CreateDelivery() {
 
       {/* BOUTON D'ESTIMATION */}
       {!estimation ? (
-        <Button title="Estimer le prix" onPress={handleCalculate} color="#007BFF" />
+        <Button title="Estimer le prix" onPress={handleCalculate} color="#ed176e" />
       ) : (
         /* SECTION TRANSPARENCE ÉCONOMIQUE */
         <View style={styles.estimationCard}>
@@ -93,7 +96,7 @@ export default function CreateDelivery() {
           <Text style={styles.estimationText}>⭐ Points de fidélité : <Text style={styles.bold}>+{estimation.points} pts</Text></Text>
           
           <View style={{ marginTop: 20 }}>
-            <Button title="Publier la mission" onPress={handlePublish} color="#28A745" />
+            <Button title="Publier la mission" onPress={handlePublish} color="#ed176e" />
           </View>
         </View>
       )}
@@ -102,24 +105,25 @@ export default function CreateDelivery() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#f5f5f5' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign: 'center', marginTop: 20 },
+  container: { flex: 1, padding: 20, backgroundColor: '#ffffff' },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign: 'center', marginTop: 20, color: '#082a56' },
   formGroup: { marginBottom: 20 },
-  label: { fontSize: 16, marginBottom: 8, fontWeight: '600', color: '#333' },
+  label: { fontSize: 16, marginBottom: 8, fontWeight: '600', color: '#082a56' },
   input: { 
     borderWidth: 1, 
-    borderColor: '#ddd', 
+    borderColor: '#bcc3cf', 
     padding: 12, 
     marginBottom: 15, 
     borderRadius: 8,
-    backgroundColor: '#fff'
+    backgroundColor: '#ffffff',
+    color: '#111827',
   },
   estimationCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     padding: 20,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#007BFF',
+    borderColor: '#d8dbe1',
     marginTop: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -127,7 +131,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
-  estimationTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 15, color: '#007BFF', textAlign: 'center' },
-  estimationText: { fontSize: 16, marginBottom: 8 },
+  estimationTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 15, color: '#082a56', textAlign: 'center' },
+  estimationText: { fontSize: 16, marginBottom: 8, color: '#2f3540' },
   bold: { fontWeight: 'bold' }
 });
