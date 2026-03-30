@@ -14,7 +14,7 @@ export default function SenderHome() {
             router.push('/(app)/(sender)/create-delivery');
         }} color="#ed176e" />
         <View style={{ height: 10 }} />
-        <Button title="View My Requests" onPress={() => {}} color="#ed176e" />
+        <Button title="View My Requests" onPress={() => { router.push('/(app)/(sender)/my-requests'); }} color="#ed176e" />
       </View>
     </View>
   );

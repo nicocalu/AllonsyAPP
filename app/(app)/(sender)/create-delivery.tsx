@@ -1,9 +1,11 @@
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useStore } from '@/src/store/useStore';
 
 export default function CreateDelivery() {
   const router = useRouter();
+  const addMission = useStore((state) => state.addMission);
 
   // 1. États pour la création de la livraison
   const [pickupAddress, setPickupAddress] = useState('');
@@ -37,12 +39,13 @@ export default function CreateDelivery() {
   const handlePublish = () => {
     if (!estimation) return;
 
-    // Ici, tu connecteras plus tard à ton Zustand store ou ton API
-    console.log("Nouvelle mission générée :", {
+    addMission({
       pickupAddress,
       dropoffAddress,
       itemDescription,
-      financials: estimation
+      price: estimation.price,
+      driverEarnings: estimation.driverEarnings,
+      points: estimation.points,
     });
     
     Alert.alert("Succès", "Votre demande a été publiée !");
