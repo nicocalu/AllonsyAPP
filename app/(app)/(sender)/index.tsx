@@ -1,13 +1,18 @@
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function SenderHome() {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>📦 Sender Mode</Text>
       <Text style={styles.description}>Create and manage your delivery requests here.</Text>
       
       <View style={styles.actions}>
-        <Button title="Create New Delivery" onPress={() => {}} />
+        <Button title="Create New Delivery" onPress={() => {
+            router.push('/(app)/(sender)/create-delivery');
+        }} />
         <View style={{ height: 10 }} />
         <Button title="View My Requests" onPress={() => {}} />
       </View>
