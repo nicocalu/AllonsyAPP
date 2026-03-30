@@ -12,17 +12,17 @@ export default function SenderHome() {
       <View style={styles.actions}>
         <Button title="Create New Delivery" onPress={() => {
             router.push('/(app)/(sender)/create-delivery');
-        }} />
+        }} color="#ed176e" />
         <View style={{ height: 10 }} />
-        <Button title="View My Requests" onPress={() => {}} />
+        <Button title="View My Requests" onPress={() => {}} color="#ed176e" />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', padding: 20, marginTop: 50 },
-  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 10 },
-  description: { fontSize: 16, color: 'gray', textAlign: 'center', marginBottom: 30 },
+  container: { flex: 1, alignItems: 'center', padding: 20, marginTop: 50, backgroundColor: '#ffffff' },
+  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 10, color: '#082a56' },
+  description: { fontSize: 16, color: '#2f3540', textAlign: 'center', marginBottom: 30 },
   actions: { width: '100%', paddingHorizontal: 20 }
 });
